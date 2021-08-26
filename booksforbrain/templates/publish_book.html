@@ -1,0 +1,310 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    
+<head>
+	<title>Books For Brain -Publish</title>
+	<link rel="shortcut icon" href="{% static 'images/brain-fav.png' %}" type="image/x-icon">
+	<link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;1,200;1,300;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+		body,
+		html {
+            font-family: 'Montserrat', sans-serif;
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			background-color: #5de6de;
+background-image: linear-gradient(315deg, #5de6de 0%, #b58ecc 74%);
+
+		}
+
+     
+		.user_card {
+			width: 350px;
+			margin-top: 100px;
+			margin-bottom: auto;
+			background-color: #1fd1f9;
+background-image: linear-gradient(315deg, #1fd1f9 0%, #b621fe 74%);
+
+			position: relative;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			padding: 10px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 5px;
+
+		}
+
+		.form_container {
+			margin-top: 20px;
+		}
+
+		#form-title{
+            font-weight: 600;
+			color: #fff;
+		}
+		.login_btn {
+			width: 100%;
+			background: #33ccff !important;
+			color: white !important;
+            transition: 0.5s ease-in-out;
+		}
+
+        .login_btn:hover{
+            background: whitesmoke !important;
+			color: #33ccff !important;
+        }
+		.login_btn:focus {
+			box-shadow: none !important;
+			outline: 0px !important;
+		}
+		.login_container {
+			padding: 0 2rem;
+		}
+		.input-group-text {
+			background: #f7ba5b !important;
+			color: white !important;
+			border: 0 !important;
+			border-radius: 0.25rem 0 0 0.25rem !important;
+		}
+		.input_user,
+		.input_pass:focus {
+			box-shadow: none !important;
+			outline: 0px !important;
+		}
+
+        #id_genre{
+            width: 193px;
+        }
+
+        #id_description{
+            height: 28px;
+            width: 193px;
+        }
+
+		#changeLI{
+    font-family: 'Roboto', sans-serif;
+   font-size: 16px;
+   display: block;
+    font-weight: 400;
+    color: #fff;
+    transition: 0.2s ease-in-out;
+}
+
+#changeLI:hover{
+    color: #d5adc8;
+    border-bottom:2px solid #861657;
+;
+}
+.logo-text{
+    display: block;
+    font-size: 20px;
+    margin: auto 5px;
+    color: #ffc857;
+    font-family: 'Roboto', sans-serif;
+    text-shadow: 1px 4px 4px #111;
+    opacity: 0.8;
+}
+
+.menu {
+  width: 60px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  padding: 0;
+}
+.line {
+  fill: none;
+  stroke: rgb(212, 45, 45);
+  stroke-width: 6;
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.line1 {
+  stroke-dasharray: 60 207;
+  stroke-width: 6;
+}
+.line2 {
+  stroke-dasharray: 60 60;
+  stroke-width: 6;
+}
+.line3 {
+  stroke-dasharray: 60 207;
+  stroke-width: 6;
+}
+.opened .line1 {
+  stroke-dasharray: 90 207;
+  stroke-dashoffset: -134;
+  stroke-width: 6;
+}
+.opened .line2 {
+  stroke-dasharray: 1 60;
+  stroke-dashoffset: -30;
+  stroke-width: 6;
+}
+.opened .line3 {
+  stroke-dasharray: 90 207;
+  stroke-dashoffset: -134;
+  stroke-width: 6;
+}
+
+
+	</style>
+
+</head>
+<body>
+	
+<nav class="navbar navbar-expand-md navbar-light " id="nav" style="background-color: rgb(157,197,195, 0.4);
+background-image: linear-gradient(315deg, #9dc5c3 0%, #5e5c5c 74%);">
+    <div class="container">
+    <a class="navbar-brand d-flex" href="#"><img class="logo" src="{% static 'images/BB_logo.png' %}" ><p class="logo-text">Books for Brain</p></a>
+    <button class="navbar-toggler menu" style=" outline: none;" onclick="this.classList.toggle('opened');this.setAttribute('aria-expanded', this.classList.contains('opened'))"  type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Main Menu">
+      <svg width="100" height="100" viewBox="0 0 100 100">
+        <path class="line line1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
+        <path class="line line2" d="M 20,50 H 80" />
+        <path class="line line3" d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
+      </svg>
+    </button>
+    <div class="collapse navbar-collapse my-1 mx-4"  id="navbarNavDropdown" >
+      <ul class="navbar-nav" >
+        <li class="nav-item active">
+          <a id="changeLI" class="nav-link" href="{% url 'home' %}">Books <span class="sr-only">(current)</span></a>
+        </li>
+        {% if request.user.is_staff %}
+        
+        <li class="nav-item">
+          <a id="changeLI" class="nav-link" href="{% url 'publish-book' %}">Publish</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a id="changeLI" class="nav-link" href="{% url 'owned-book'  %}">Owned Book</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <h5 class="my-1 h5">{{request.user | title}} <i class="fas fa-user-check" style="color: paleturquoise;"></i></h5>
+        </li>
+
+        <li class="d-block d-md-none">
+          <a href="{% url 'logout' %}" class="btn btn-warning m-3 m-md-0">Logout</a>
+        </li>
+      </ul>
+    </div>
+    <a href="{% url 'logout' %}" class="btn btn-warning m-3 m-md-0 d-none d-md-block">Logout</a>
+</div>
+  </nav>
+
+
+	<div class="container ">
+
+		<div class="d-flex justify-content-center h-100">
+			
+			<div class="user_card">
+				<div class="d-flex justify-content-center">
+					<h3 id="form-title">Publish Book</h3>
+				</div>
+				{% for message in messages %}
+		<p class="alert alert-info">{{ message }} 😒</p>
+		{% endfor %}
+				<div class="d-flex justify-content-center form_container">
+
+					<form method="POST" action="">
+                        {% csrf_token %}
+						<div class="input-group mb-3">
+							<div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-images"></i></span>	
+							</div>
+							{{publishForm.book_image}}
+						</div>
+	
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+                    <span class="input-group-text"> <i class="fas fa-book"></i></span>	
+							</div>
+							{{publishForm.book_name}}
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>								</div>
+							{{publishForm.book_author}}
+						</div>
+                        <div class="input-group mb-2">
+							<div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-link"></i></span>								</div>
+							{{publishForm.book_link}}
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-money-check-alt"></i></span>
+							</div>
+							{{publishForm.price}}
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-book"></i></span>
+							</div>
+							{{publishForm.genre}}
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-layer-group"></i><span>
+							</div>
+							{{publishForm.quantity}}
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-pencil-ruler"></i></span>
+							</div>
+							{{publishForm.description}}
+						</div>
+
+				   		<div class="d-flex justify-content-center mt-3 login_container">
+				 			<input class="btn login_btn" type="submit" value="Publish Book">
+				   		</div>
+					</form>
+				</div>
+		     {{form.errors}}
+		
+			</div>
+		</div>
+	</div>
+	<script>
+						/* Because i didnt set placeholder values in forms.py they will be set here using vanilla Javascript
+		//We start indexing at one because CSRF_token is considered and input field 
+		 */
+
+		//Query All input fields
+		var form_fields = document.getElementsByTagName('input')
+        var form_select = document.getElementsByTagName('select')
+        var form_textarea = document.getElementsByTagName('textarea')
+		form_fields[1].placeholder='Book Image..';
+		form_fields[2].placeholder='Book Title..';
+		form_fields[3].placeholder='Book Author..';
+		form_fields[4].placeholder='Book Link..';
+		form_fields[5].placeholder='Book Price';
+		form_fields[6].placeholder='Quantity';
+		form_fields[7].placeholder= 'Description';
+
+
+		for (var field in form_fields){	
+			form_fields[field].className += ' form-control'
+		}
+
+        form_textarea.style += 'form-control'
+	</script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	
+</body>
+</html>
+

@@ -1,0 +1,123 @@
+{% extends 'main.html' %}
+{% load static %}
+ {% block content %}
+<style>
+  
+  
+h5{
+    margin: 0;
+    padding: 0;
+    font-size: 35px;
+    text-shadow: 1px 2px 2px peru;
+    
+}
+
+.sold-out{
+  position: absolute;
+  width: 100px;
+  z-index: 1000;
+  left: 0;
+}
+</style>
+
+ <div class="bd-example">
+    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+
+      <div class="carousel-inner">
+        <div class="carousel-item active" id="c-div">
+          <img src="{% static 'images/banner.jpg' %}" class="d-block w-100" alt="...">
+          <div class="carousel-caption d-block">
+            <h5>Welcome to 
+                <br>Books for Brain 📚🧠</h5>
+            <a class="c-span">Enlighten your brain</a>
+             </div>
+        </div>
+        <div class="carousel-item" id="c-div">
+          <img src="{% static 'images/Library-.jpg' %}" class="d-block w-100" alt="...">
+          <div class="carousel-caption d-block">
+            <h5>Check out all of our amazing books😀</h5>
+            <h4 class="c-span">Books just like movies entertain you</h4>
+          </div>
+        </div>
+        <div class="carousel-item" id="c-div">
+          <img  src="{% static 'images/book-2.jpg' %}" class="d-block w-100" alt="...">
+          <div class="carousel-caption d-block">
+            <h5>Why don't you get a popc🍿rn while you read our books😎</h5>
+            <h4 class="c-span">Just have fun!!.</h4>
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    
+  </div>
+</div>
+<div class="container">
+    {% include 'status.html' %}
+    <br>
+
+    <div class="row p-3 w-100">
+        <div class="col-md">
+            <div class="card card-body d-flex">
+                <h4 style="text-align: center;">Books</h4>
+                <form method="GET" style="margin: 0 auto; display: block;">
+                  {{ book_filter.form }}
+                  <button class="btn btn-dark"><i class="fas fa-search"></i></button>
+                </form>
+                
+            </div>
+            <div class="card card-body my-2">
+              {% for message in messages %}
+					{% if message.tags == 'info' %}
+						<div class="alert alert-info mt-2"><p style="text-align: center;">{{ message }}</p></div>
+					{% elif message.tags == 'success' %}
+					<div class="alert alert-success mt-2"><p style="text-align: center;">{{ message }}</p></div>
+					{% endif %}
+					{% endfor %}
+                <div class="row my-2">
+                  {% for books in all_books reversed%}
+                  
+                  <div class="d-flex col-12 col-lg-4 my-3" style="position: relative;">
+                   
+
+                  <img style="height: 150px;" src="{{ books.book_image }}">
+                <div class="mx-lg-2" style="padding: 0 5x; margin: 0 auto; display: block;">
+                  {% if books.quantity < 1 %}
+                  <img class="sold-out" src="{% static 'images/sold-out.png' %}" >
+                  
+                  <h4 style="font-size: 15px;">📖 {{ books.book_name }}</h4>
+                   {% else %}
+                   <h4 style="font-size: 15px;"><a href="{% url 'book-detail' books.id %}">📖 {{ books.book_name }}</a></h4>
+                   {% endif %} 
+                   <p style="font-size: 13px;">{{ books.book_author }} ✍️</p>
+                    <p style="line-height: 5px;">💵 ${{ books.price }}</p>
+                    <p style=" font-size: 13px;">📅 {{ books.date_published }}</p>
+                    <p style="line-height: 10px; font-size: 13px;">{{ books.genre }} 🔖</p>
+                    <p style="line-height: 10px; font-size: 13px;">In <span style="color: palevioletred;">Stock</span>: {{ books.quantity }} 🔖 </p>
+                    {% if request.user.is_staff %}
+                    <a href="{% url 'update-book' books.id %}" class="btn btn-info"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'delete-book' books.id %}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                     {% endif %}
+                  </div>
+                    </div>
+
+                    {% endfor %}
+                </div>
+               
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+</div>
+{% endblock %}
+
+

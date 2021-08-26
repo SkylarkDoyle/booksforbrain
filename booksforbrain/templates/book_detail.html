@@ -1,0 +1,73 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    #book-text{
+        text-align: center;
+    }
+</style>
+
+
+<div class="container">
+  
+<div class="row p-3 w-100" style="margin: 100px 0 ;">
+    <div class="col-md">
+      <a href="{% url 'home' %}"><i class="fas fa-arrow-circle-left" style="color: darkslategray; font-size: 30px;"></i></a>
+        <div class="card card-body">
+           
+            <h4 class="d-block m-auto">{{book.book_name}}</h4>
+        </div>
+        <div class="card card-body my-2">
+            <div class="row">
+                <div class="col-12 d-md-flex p-md-5">
+              <img width="200" class="d-block m-auto m-md-0" src="{{ book.book_image }}">
+            <div style="display: block;  padding: 0 5px; margin: 10px auto; ">
+                <h4 id='book-text'> Book: {{book.book_name}}</h4>
+                <p id='book-text'>Book Author:  {{book.book_author}}</</p>
+                <p id='book-text'>Publish date: {{book.date_published}}</</p>
+                <p id='book-text'>Price: ${{book.price}}</p></p>
+                <p id='book-text'>Genre: {{book.genre}}</p>
+                <p id='book-text'>In <span style="color: palevioletred;">Stock</span>: {{ book.quantity }} </p>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    
+                  <button class="btn btn-info d-block m-auto">Buy Book</button>
+                 
+                    </form>
+                    
+                
+                <p class="my-2">Not your type of book?🤷‍♂️<a href="{% url 'home' %}"> Check other books then</a> </p>
+            </div>
+                </div>
+                <div class="accordion w-100" id="accordionExample">
+                    <div class="card" style="background-color: #595666;
+                    background-image: linear-gradient(316deg, #cdc1ff 0%, #e5d9f2 74%);">
+                      <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                          <button class="btn btn-light d-block m-auto" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Description
+                          </button>
+                        </h2>
+                      </div>
+                  
+                      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            {{book.description}}</div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                
+            </div>
+           
+        </div>
+    </div>
+    
+</div>
+</div>
+
+
+
+{% endblock %}
+

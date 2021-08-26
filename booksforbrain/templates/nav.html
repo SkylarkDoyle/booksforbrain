@@ -1,0 +1,120 @@
+{% load static %}
+<style>
+  #changeLI{
+    font-family: 'Roboto', sans-serif;
+   font-size: 16px;
+   display: block;
+    font-weight: 400;
+    color: #fff;
+    transition: 0.2s ease-in-out;
+}
+
+#changeLI:hover{
+    color: #d5adc8;
+    border-bottom:2px solid #861657;
+;
+}
+.logo-text{
+    display: block;
+    font-size: 20px;
+    margin: auto 5px;
+    color: #ffc857;
+    font-family: 'Roboto', sans-serif;
+    text-shadow: 1px 4px 4px #111;
+    opacity: 0.8;
+}
+
+.menu {
+  width: 60px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  padding: 0;
+}
+.line {
+  fill: none;
+  stroke: rgb(212, 45, 45);
+  stroke-width: 6;
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.line1 {
+  stroke-dasharray: 60 207;
+  stroke-width: 6;
+}
+.line2 {
+  stroke-dasharray: 60 60;
+  stroke-width: 6;
+}
+.line3 {
+  stroke-dasharray: 60 207;
+  stroke-width: 6;
+}
+.opened .line1 {
+  stroke-dasharray: 90 207;
+  stroke-dashoffset: -134;
+  stroke-width: 6;
+}
+.opened .line2 {
+  stroke-dasharray: 1 60;
+  stroke-dashoffset: -30;
+  stroke-width: 6;
+}
+.opened .line3 {
+  stroke-dasharray: 90 207;
+  stroke-dashoffset: -134;
+  stroke-width: 6;
+}
+
+
+
+</style>
+<div class="container">
+  {% for message in messages %}
+  <a href="{% url 'owned-book' %}" class="alert alert-success mt-2" style="z-index: 1000; position: absolute; left: 50%;
+  top: 10%;
+  transform: translate(-50%, -50%);">{{ message }} </a>
+
+  {% endfor %}
+</div>
+
+<nav class="navbar navbar-expand-md navbar-light " id="nav" style="background-color: rgb(157,197,195, 0.4);
+background-image: linear-gradient(315deg, #9dc5c3 0%, #5e5c5c 74%);">
+    <div class="container">
+    <a class="navbar-brand d-flex" href="#"><img class="logo" src="{% static 'images/BB_logo.png' %}" ><p class="logo-text">Books for Brain</p></a>
+    <button class="navbar-toggler menu" style=" outline: none;" onclick="this.classList.toggle('opened');this.setAttribute('aria-expanded', this.classList.contains('opened'))"  type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Main Menu">
+      <svg width="100" height="100" viewBox="0 0 100 100">
+        <path class="line line1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
+        <path class="line line2" d="M 20,50 H 80" />
+        <path class="line line3" d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
+      </svg>
+    </button>
+    <div class="collapse navbar-collapse my-1 mx-4"  id="navbarNavDropdown" >
+      <ul class="navbar-nav" >
+        <li class="nav-item active">
+          
+          <a id="changeLI" class="nav-link" href="{% url 'home' %}">📚 Books <span class="sr-only">(current)</span></a>
+        </li>
+        {% if request.user.is_staff %}
+        
+        <li class="nav-item">
+          <a id="changeLI" class="nav-link" href="{% url 'publish-book' %}">🖊️ Publish</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a id="changeLI" class="nav-link" href="{% url 'owned-book'  %}">📖 Owned Book</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <h5 class="my-1 h5">{{request.user | title}} <i class="fas fa-user-check" style="color: paleturquoise;"></i></h5>
+        </li>
+
+        <li class="d-block d-md-none">
+          <a href="{% url 'logout' %}" class="btn btn-warning m-3 m-md-0">Logout</a>
+        </li>
+      </ul>
+    </div>
+    <a href="{% url 'logout' %}" class="btn btn-warning m-3 m-md-0 d-none d-md-block">Logout</a>
+</div>
+  </nav>

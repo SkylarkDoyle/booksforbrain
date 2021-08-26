@@ -1,0 +1,115 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books for Brain</title>
+    <link rel="shortcut icon" href="{% static 'images/brain-fav.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+
+<style>
+    #book-loader{
+        position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+}
+
+</style>
+
+<body style="background: #f5f7f6; font-family: 'Montserrat', sans-serif;">
+
+    
+    <div id="book-loader">
+    <img style="width: 500px; " src="{% static 'images/book-loader.gif' %}" alt="">
+    </div>
+
+<div id="home-body">
+
+</div>
+
+
+
+    
+<!-- -->
+
+
+<!-- Note in book -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+ <script>
+     var loader = document.getElementById('book-loader')
+     var home = document.getElementById('home-body')
+
+
+     $.ajax({
+         type: 'GET',
+         url: '',
+         success: function(response){
+             setTimeout(() => {
+                loader.classList.add('loader')
+                home.innerHTML += `{% include 'nav.html' %} {% block content %}{% endblock %}<footer>
+	<div class="content">
+		<div class="top">
+			<div class="logo-details">
+				<span class="logo_name">Books for Brain</span>
+             <p style="font-size: 15px">Skywebs🕸️</p>
+			</div>
+			<div class="media-icons">
+				<a href="https://ar-ar.facebook.com/people/Skylark-Doyle/100069273742535/"><i class="fab fa-facebook-f"></i></a>
+				<a href="https://www.instagram.com/skylark_al_doyle/"><i class="fab fa-instagram"></i></a>
+			</div>
+		</div>
+		<div class="link-boxes">
+			<ul class="box">
+				<li class="link_name">Links</li>
+                {% if request.user.is_staff %}
+				<li><a href="{% url 'home' %}">Home</a></li>
+				<li><a href="{% url 'publish-book' %}">Publish</a></li>
+                {% else %}
+                <li><a href="{% url 'home' %}">Home</a></li>
+				<li><a href="{% url 'owned-book' %}">Books you have</a></li>
+                {% endif %}
+			</ul>
+			
+	
+
+		</div>
+	</div>
+	    <div class="bottom-details">
+      <div class="bottom_text">
+        <span class="copyright_text">Copyright © 2021 <a href="#">Books4Brain.</a></span>
+      </div>
+    </div>
+</footer>`
+
+             }, 1000)
+         },
+         error: function(error){
+             setTimeout(() => {
+                loader.id.add('loader')
+                home.innerHTML += "Failed to load page"
+             })
+         }
+
+
+     })
+
+       
+ </script>   
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>

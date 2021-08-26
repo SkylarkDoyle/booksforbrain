@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    #book-text{
+        text-align: center;
+    }
+</style>
+<div class="container" style="margin: 100px auto;">
+    <div class="row p-3 w-100">
+        <div class="col-md">
+            <div class="card card-body">
+                <h4>Owned Books</h4>
+            </div>
+            <div class="card card-body my-2">
+              {% for message in messages %}
+					<div class="alert alert-success mt-2"><p style="text-align: center;">{{ message }}</p></div>
+					{% endfor %}
+                <div class="row my-2">
+                  {% for books in owned_books reversed%}
+                  <div class="d-flex col col-lg-4 my-3" >
+                  <img style="height: 150px;" src="{{ books.book.book_image }}">
+                <div style="line-height: 50px;  padding: 0 10px; margin: 0 auto; display: block;">
+                    <h4 style="font-size: 18px;">Book: {{ books.book.book_name }}</h4>
+                    <p style="line-height: 15px; font-size: 15px;">Book Author: {{ books.book.book_author }}</p>
+                    <p style="line-height: 15px; font-size: 15px;">Genre: {{ books.book.genre }} </p>
+                    <a href="{{ books.book.book_link }}" class="btn btn-success">Read Book</a>
+                </div>
+                    </div>
+                    {% endfor %}
+                </div>
+               
+            </div>
+        </div>
+        
+    </div>
+            </div>
+           
+        </div>
+    </div>
+    
+</div>
+</div>
+
+
+
+{% endblock %}
