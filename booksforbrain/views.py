@@ -105,9 +105,11 @@ def bookDetail(request, id):
 def ownedBook(request):
     reader = request.user
     owned_books = reader.owned.all()
+    owned_book_count = owned_books.count()
 
     context = {
-        'owned_books': owned_books
+        'owned_books': owned_books,
+        'owned_book_count': owned_book_count
     }
     
     

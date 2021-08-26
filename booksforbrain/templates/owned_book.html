@@ -17,8 +17,10 @@
               {% for message in messages %}
 					<div class="alert alert-success mt-2"><p style="text-align: center;">{{ message }}</p></div>
 					{% endfor %}
+                {% if owned_book_count >= 1 %}
                 <div class="row my-2">
                   {% for books in owned_books reversed%}
+    
                   <div class="d-flex col col-lg-4 my-3" >
                   <img style="height: 150px;" src="{{ books.book.book_image }}">
                 <div style="line-height: 50px;  padding: 0 10px; margin: 0 auto; display: block;">
@@ -28,8 +30,13 @@
                     <a href="{{ books.book.book_link }}" class="btn btn-success">Read Book</a>
                 </div>
                     </div>
+                    
+                    
                     {% endfor %}
                 </div>
+                {% else %}
+                    <h2 style="text-align: center;">No owned books yet</h2>
+                {% endif %}
                
             </div>
         </div>
