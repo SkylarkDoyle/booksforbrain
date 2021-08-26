@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-5in-v3ya8lgzp9*)c#5yxa3(=t=mg3b$@9@0^w8qepizmd+!hy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['booksforbrain.herokuapp.com/', '127.0.0.1']
+ALLOWED_HOSTS = ['booksforbrain.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
