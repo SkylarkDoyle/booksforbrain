@@ -1,0 +1,1 @@
+web: gunicorn booksforbrainapp.wsgi --log-file -
